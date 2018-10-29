@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 import * as actionsTypes from 'constants/actionsTypes/clients'
 
 const initialState = {
-  clients: [],
+  allClients: [],
+  activeClient: null,
   filter: null
 }
 
@@ -14,7 +15,7 @@ function filter(state = initialState.filter, action){
   }
 }
 
-function clients(state = initialState.clients, action){
+function allClients(state = initialState.allClients, action){
   switch(action.type){
     case actionsTypes.LOAD_CLIENTS_SUCCESS: 
       return action.payload
@@ -22,7 +23,16 @@ function clients(state = initialState.clients, action){
   }
 }
 
+function activeClient(state = initialState.activeClient, action){
+  switch(action.type){
+    case actionsTypes.SET_ACTIVE_CLIENT:
+      return action.payload
+    default: return state
+  }
+}
+
 export default combineReducers({
-  clients,
-  filter
+  allClients,
+  filter,
+  activeClient
 })

@@ -7,7 +7,6 @@ import ClientsService from 'services/clients'
 function * loadClients(action){
   try {
     const clients = yield call(ClientsService.loadClients)
-    console.log(clients)
     yield put(actions.loadClientsSuccess(clients))
   } catch (e) {
     console.log(e)
@@ -15,7 +14,7 @@ function * loadClients(action){
   }
 }
 
-export default function* recipesSaga(){
+export default function* clientsSaga(){
   yield all([
     takeLatest(actionsTypes.LOAD_CLIENTS_REQUEST, loadClients)
   ])
