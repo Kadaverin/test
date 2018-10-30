@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
 import { Grid, Input } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 class SearchBar extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      searchInput: ''
-    }
-  }
 
   handleSearch = _.debounce(input => {
     this.props.onSearchInput(input.value)
@@ -16,7 +11,7 @@ class SearchBar extends Component {
 
   render(){
     return(
-      <Grid.Row style={{height: '10%' ,paddingTop:'1rem'}} >
+      <Grid.Row style={{height: '10%', paddingTop:'1rem'}} >
         <Input 
           fluid
           icon='search' 
@@ -27,6 +22,10 @@ class SearchBar extends Component {
       </Grid.Row>
     )
   }
+}
+
+SearchBar.propTypes = {
+  onSearchInput: PropTypes.func.isRequired
 }
 
 export default SearchBar

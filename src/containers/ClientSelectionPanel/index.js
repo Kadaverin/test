@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setActiveClient, changeClientsFilter } from 'actions/clients';
 import { visibleClients } from 'selectors/clients'
+import PropTypes from 'prop-types'
+import clientProp from 'constants/propTypes/client'
+
 
 class ClientSelectionPanel extends Component {
   render(){
@@ -32,5 +35,13 @@ const mapDispatchToProps = (dispatch) => ({
      changeClientsFilter
   }, dispatch)
 })
+
+ClientSelectionPanel.propTypes = {
+  clients: PropTypes.arrayOf( clientProp ),
+  actions: PropTypes.shape({
+    setActiveClient: PropTypes.func.isRequired,
+    changeClientsFilter: PropTypes.func.isRequired,
+  })
+}
 
 export default connect( mapStateToProps , mapDispatchToProps)(ClientSelectionPanel);

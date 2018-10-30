@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loadClients } from 'actions/clients'
 import ClientDetails from 'containers/ClientDetails'
 import ClientSelectionPanel from 'containers/ClientSelectionPanel'
-import { Button, Card, Image, Grid, Search, List, Input} from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 import './App.css'
 
 
@@ -14,6 +14,7 @@ class App extends Component {
   componentDidMount(){
     this.props.actions.loadClients()
   }
+  
   render() {
     return (
       <div className="App">
@@ -33,5 +34,11 @@ class App extends Component {
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({ loadClients }, dispatch)
 })
+
+App.propTypes = {
+  actions: PropTypes.shape({
+    loadClients: PropTypes.func.isRequired
+  })
+}
 
 export default connect(null, mapDispatchToProps)(App);

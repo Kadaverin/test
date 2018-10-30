@@ -1,38 +1,32 @@
 import React, { Component } from 'react'
 import { Grid, Card, List, Image } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
+import clientProp from 'constants/propTypes/client'
 import './ClientsList.css'
 
+const ClientsList = ({clients, onItemClick}) => (
+  <Grid.Row style={{height: '90%'}}> 
+    <List className='clients-list' divided selection>
+      {
+        clients && clients.map( (client, index) => (
+          <List.Item onClick={ () => onItemClick(client) } key={index}>
+            <Image avatar src={client.general.avatar} size='mini'/>
+            <List.Content>
+              <List.Header>
+                {client.general.firstName + " " + client.general.lastName}
+              </List.Header>
+              <List.Description> {client.job.title} </List.Description>
+            </List.Content>
+          </List.Item>
+        ))
+      }                
+    </List>         
+  </Grid.Row>
+)
 
-class ClientsList extends Component {
-
-  render(){
-    console.log('LIST')
-    console.log(this.props)
-    return(
-      <Grid.Row style={{height: '90%'}}> 
-        <List link className='clients-list'>
-          {
-            this.props.clients.map( (client, index) => (
-              <List.Item onClick={ () => this.props.onItemClick(client) }>
-                <Card link fluid> 
-                  <Card.Content>
-                    <Image floated='left' size='mini' src={client.general.avatar} />
-                    <Card.Header textAlign="left">
-                      {client.general.firstName + " " + client.general.lastName}
-                    </Card.Header>
-                    <Card.Meta textAlign="left">
-                      {client.job.title}
-                    </Card.Meta>
-                  </Card.Content>
-                </Card>
-              </List.Item>
-            ))
-          }
-                
-        </List>         
-      </Grid.Row>
-    )
-  }
+ClientsList.propTypes = {
+  clients: PropTypes.arrayOf(clientProp).isRequired,
+  onItemClick: PropTypes.func.isRequired
 }
 
 export default ClientsList

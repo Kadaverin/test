@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect'
 import isClientsInfoIncludesFilter from 'helpers/isClientsInfoIncludesFilter'
-import _ from 'lodash'
 
 const getAllClients = (state) => state.clients.allClients
 const getClientsFilter = (state) => state.clients.filter
