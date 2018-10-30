@@ -10,7 +10,9 @@ class ClientSelectionPanel extends Component {
   render(){
     return(
       <React.Fragment>
-        <SearchBar />
+        <SearchBar 
+          onSearchInput={this.props.actions.changeClientsFilter}
+        />
         <ClientsList 
           clients={this.props.clients}
           onItemClick={this.props.actions.setActiveClient}

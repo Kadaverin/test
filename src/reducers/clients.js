@@ -10,7 +10,7 @@ const initialState = {
 function filter(state = initialState.filter, action){
   switch(action.type){
     case actionsTypes.CHANGE_CLIENTS_FILTER:
-      return action.payload.clientsFilter
+      return action.payload
     default: return state
   }
 }
