@@ -1,22 +1,15 @@
 import _ from 'lodash'
 
-function isClientsInfoIncludesFilter(client, inputString){
-  const regExp = new RegExp(_.escapeRegExp(inputString), 'i' )
-  return isSomeValuesMatchRegExp(client, regExp, ['avatar'])
-}
+function isClientsInfoIncludesFilter(client, filterString){
+  const regExp = new RegExp(_.escapeRegExp(filterString), 'i' )
 
-function isSomeValuesMatchRegExp(obj, regExp, ignoreKyes = []){
-  return _.keys(obj).some( key => {
-    if( ignoreKyes.includes(key)){
-      return false
-    }
-
-    if( typeof obj[key] !== 'object' || Array.isArray(obj[key]) ) {
-      return regExp.test(obj[key])
-    } 
-
-    return isSomeValuesMatchRegExp(obj[key], regExp, ignoreKyes)
-  })
+  return [
+    client.general.firstName, client.general.lastName,
+    client.job.title, client.job.company, 
+    client.contact.phone, client.contact.email, 
+    client.address.city, client.address.country, client.address.zipCode
+  ]
+  .some( clientInfo => regExp.test(clientInfo) )
 }
 
 export default isClientsInfoIncludesFilter
